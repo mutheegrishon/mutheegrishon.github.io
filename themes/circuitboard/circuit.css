@@ -1,0 +1,95 @@
+/* === Circuit Board / Cyber Network Theme === */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Courier New', monospace;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #02070a;
+  color: #00e6b8;
+  overflow: hidden;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: rgba(2, 10, 15, 0.9);
+  border-bottom: 1px solid #00e6b8;
+  padding: 10px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.nav-left a {
+  color: #00e6b8;
+  text-decoration: none;
+  margin-right: 20px;
+  transition: color 0.3s ease;
+}
+
+.nav-left a:hover {
+  color: #66fff5;
+}
+
+.nav-right h1 {
+  color: #00e6b8;
+  font-size: 20px;
+  text-shadow: 0 0 8px #00e6b8;
+}
+
+.section {
+  text-align: center;
+  min-height: 100vh;
+  padding: 120px 10%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #00e6b8;
+}
+
+a {
+  color: #00e6b8;
+  text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(2, 10, 15, 0.9);
+  border-top: 1px solid #00e6b8;
+  color: #00e6b8;
+}
+
+/* Background animation canvas */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Glowing network pulse animation */
+@keyframes pulse {
+  0% {
+    text-shadow: 0 0 5px #00e6b8, 0 0 10px #00e6b8;
+  }
+  100% {
+    text-shadow: 0 0 15px #00e6b8, 0 0 25px #00e6b8;
+  }
+}
+
+h2 {
+  animation: pulse 1.5s ease-in-out infinite alternate;
+}
