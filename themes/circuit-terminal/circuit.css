@@ -438,4 +438,8 @@ footer {
   }
 }
 
+.cert-card {
+  position: relative;
+  z-index: 2; /* ensures cards appear above glowing traces */
+}
 
