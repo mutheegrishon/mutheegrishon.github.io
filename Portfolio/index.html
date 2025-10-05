@@ -28,7 +28,7 @@
   <main>
     <section id="home" class="section">
       <h2>Welcome to My Portfolio</h2>
-      <p>Cybersecurity Enthusiast | Ethical Hacker | Developer</p>
+      <p id="typed-text"></p>
     </section>
 
     <section id="about" class="section">
@@ -60,19 +60,17 @@
     <p>© 2025 Grishon Muthee. All Rights Reserved.</p>
   </footer>
 
-  <!-- Matrix Animation Script -->
+  <!-- Matrix Background Animation -->
   <script>
     const canvas = document.getElementById("matrixBackground");
     const ctx = canvas.getContext("2d");
 
-    // Resize canvas to full screen
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
 
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
     const fontSize = 16;
     const columns = canvas.width / fontSize;
-
     const drops = [];
     for (let x = 0; x < columns; x++) drops[x] = 1;
 
@@ -89,18 +87,69 @@
 
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
           drops[i] = 0;
-
         drops[i]++;
       }
     }
 
     setInterval(draw, 33);
 
-    // Adjust to window resize
     window.addEventListener("resize", () => {
       canvas.height = window.innerHeight;
       canvas.width = window.innerWidth;
     });
+  </script>
+
+  <!-- Typed Text Effect -->
+  <script>
+    const textElement = document.getElementById("typed-text");
+    const phrases = [
+      "Cybersecurity Enthusiast",
+      "Ethical Hacker",
+      "Developer",
+      "Defender of the Digital Realm"
+    ];
+    let i = 0;
+    let j = 0;
+    let currentPhrase = [];
+    let isDeleting = false;
+    let isEnd = false;
+
+    function loop() {
+      isEnd = false;
+      textElement.innerHTML = currentPhrase.join("");
+
+      if (i < phrases.length) {
+        if (!isDeleting && j <= phrases[i].length) {
+          currentPhrase.push(phrases[i][j]);
+          j++;
+          textElement.innerHTML = currentPhrase.join("");
+        }
+
+        if (isDeleting && j <= phrases[i].length) {
+          currentPhrase.pop(phrases[i][j]);
+          j--;
+          textElement.innerHTML = currentPhrase.join("");
+        }
+
+        if (j == phrases[i].length) {
+          isEnd = true;
+          isDeleting = true;
+        }
+
+        if (isDeleting && j === 0) {
+          currentPhrase = [];
+          isDeleting = false;
+          i++;
+          if (i === phrases.length) {
+            i = 0;
+          }
+        }
+      }
+      const speed = isEnd ? 1000 : isDeleting ? 50 : 100;
+      setTimeout(loop, speed);
+    }
+
+    loop();
   </script>
 </body>
 </html>
