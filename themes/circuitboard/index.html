@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grishon Muthee | Circuit Board Theme</title>
+  <style>
+    body {
+      margin: 0;
+      background: #02070a;
+      color: #00e6b8;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+    }
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      background: rgba(2, 10, 15, 0.9);
+      border-bottom: 1px solid #00e6b8;
+      padding: 10px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+    a { color: #00e6b8; text-decoration: none; margin-right: 20px; }
+    a:hover { color: #66fff5; }
+    .section {
+      padding-top: 120px;
+      text-align: center;
+      min-height: 100vh;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="circuit"></canvas>
+  <header>
+    <div>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <h1>Grishon Muthee</h1>
+  </header>
+
+  <section id="home" class="section">
+    <h2>Welcome to My Cyber Circuit Portfolio</h2>
+    <p>Cybersecurity Enthusiast | Ethical Hacker | Developer</p>
+  </section>
+
+  <script>
+    const canvas = document.getElementById("circuit");
+    const ctx = canvas.getContext("2d");
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    const nodes = [];
+    for (let i = 0; i < 100; i++) {
+      nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5,
+      });
+    }
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < nodes.length; i++) {
+        let n1 = nodes[i];
+        n1.x += n1.dx;
+        n1.y += n1.dy;
+        if (n1.x < 0 || n1.x > canvas.width) n1.dx *= -1;
+        if (n1.y < 0 || n1.y > canvas.height) n1.dy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(n1.x, n1.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = "#00e6b8";
+        ctx.fill();
+
+        for (let j = i + 1; j < nodes.length; j++) {
+          let n2 = nodes[j];
+          const dist = Math.hypot(n1.x - n2.x, n1.y - n2.y);
+          if (dist < 120) {
+            ctx.strokeStyle = `rgba(0, 230, 184, ${1 - dist / 120})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(n1.x, n1.y);
+            ctx.lineTo(n2.x, n2.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
+</body>
+</html>
