@@ -380,12 +380,19 @@ footer {
   }
 }
 
-/* === CYBER GLOW CIRCUIT LINES === */
+/* === CYBER GLOW CIRCUIT LINES (FIXED VERSION) === */
+#certifications {
+  position: relative; /* ensures circuit traces position relative to this section */
+  overflow: hidden;
+}
+
 .circuit-traces {
   position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* above background, below cards */
   pointer-events: none;
 }
 
@@ -396,41 +403,38 @@ footer {
 }
 
 .trace {
-  stroke: rgba(0, 255, 195, 0.15);
-  stroke-width: 1.2;
-  filter: drop-shadow(0 0 4px rgba(0, 255, 195, 0.4));
-  stroke-dasharray: 6 12;
-  animation: traceFlow 6s linear infinite;
+  stroke: rgba(0, 255, 195, 0.12);
+  stroke-width: 1.4;
+  filter: drop-shadow(0 0 5px rgba(0, 255, 195, 0.3));
+  stroke-dasharray: 6 14;
+  stroke-dashoffset: 0;
+  animation: traceFlow 8s linear infinite;
   opacity: 0;
   transition: opacity 1s ease;
 }
 
-/* Fade-in lines when hovering over section */
 #certifications:hover .trace {
   opacity: 1;
+  animation: traceFlow 4s linear infinite, tracePulse 3s ease-in-out infinite;
 }
 
-/* Simulate current flow with moving dash pattern */
+/* flowing dash movement */
 @keyframes traceFlow {
   0% {
     stroke-dashoffset: 0;
   }
   100% {
-    stroke-dashoffset: -200;
+    stroke-dashoffset: -300;
   }
 }
 
-/* Optional: subtle pulse on hover */
-#certifications:hover .trace {
-  animation: traceFlow 4s linear infinite, tracePulse 3s ease-in-out infinite;
-}
-
+/* glowing pulse */
 @keyframes tracePulse {
   0%, 100% {
-    stroke: rgba(0, 255, 195, 0.15);
+    stroke: rgba(0, 255, 195, 0.12);
   }
   50% {
-    stroke: rgba(0, 255, 195, 0.4);
+    stroke: rgba(0, 255, 195, 0.45);
   }
 }
 
