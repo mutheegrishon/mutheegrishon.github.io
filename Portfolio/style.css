@@ -86,3 +86,22 @@ footer {
   border-top: 1px solid #00ff99;
   font-size: 14px;
 }
+
+/* Typed text styling */
+#typed-text {
+  color: #00ff99;
+  font-size: 20px;
+  letter-spacing: 1px;
+  border-right: 2px solid #00ff99;
+  white-space: nowrap;
+  overflow: hidden;
+  width: fit-content;
+  margin: 20px auto;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
