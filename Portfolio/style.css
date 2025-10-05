@@ -1,4 +1,4 @@
-/* Cybersecurity Theme Styling */
+/* ====== Cybersecurity Matrix Theme ====== */
 
 * {
   margin: 0;
@@ -9,18 +9,29 @@
 }
 
 body {
-  background: radial-gradient(circle at top, #0a0f1f, #000);
   color: #00ff99;
-  line-height: 1.6;
+  overflow-x: hidden;
 }
 
+/* ====== Matrix Background Canvas ====== */
+#matrixBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: black;
+}
+
+/* ====== Header ====== */
 header {
   position: fixed;
   top: 0;
   width: 100%;
   background: rgba(0, 10, 20, 0.9);
   border-bottom: 1px solid #00ff99;
-  z-index: 1000;
+  z-index: 10;
   padding: 10px 0;
 }
 
@@ -48,11 +59,12 @@ header {
   font-size: 20px;
 }
 
+/* ====== Sections ====== */
 .section {
   min-height: 100vh;
   padding: 120px 10%;
   text-align: center;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 h2 {
@@ -66,6 +78,7 @@ a {
   text-decoration: underline;
 }
 
+/* ====== Footer ====== */
 footer {
   text-align: center;
   padding: 20px;
