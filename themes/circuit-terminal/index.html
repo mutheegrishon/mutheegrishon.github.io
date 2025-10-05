@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Grishon Muthee | Cybersecurity Portfolio</title>
-  <link rel="stylesheet" href="circuit.css">
+  <link rel="stylesheet" href="circuit.css" />
 </head>
 <body>
+  <!-- === Animated Circuit Background === -->
   <canvas id="circuit"></canvas>
 
+  <!-- === Fixed Header Navigation === -->
   <header>
     <div class="nav-left">
       <a href="#home">Home</a>
@@ -22,27 +24,86 @@
     </div>
   </header>
 
-  <!-- === Home Section === -->
+  <!-- ============================== -->
+  <!--           HOME SECTION         -->
+  <!-- ============================== -->
   <section id="home" class="section">
     <div id="terminal">
       <div id="console">
         <span id="typed"></span><span class="cursor"></span>
       </div>
     </div>
-    <h2>Welcome to My Portfolio</h2>
+    <h2>Welcome to My Cybersecurity Portfolio</h2>
     <p>Cybersecurity Enthusiast | Ethical Hacker | Developer</p>
   </section>
 
-  <!-- === Dynamic Sections === -->
-  <section id="about" class="section"></section>
-  <section id="projects" class="section"></section>
-  <section id="certifications" class="section"></section>
-  <section id="contact" class="section"></section>
+  <!-- ============================== -->
+  <!--           ABOUT SECTION        -->
+  <!-- ============================== -->
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>
+      I’m <strong>Grishon Muthee</strong>, a Cybersecurity Enthusiast and Ethical Hacker passionate about
+      building secure systems and defending against modern cyber threats.
+    </p>
+    <ul style="list-style:none;margin-top:20px;">
+      <li>• Network and Application Security</li>
+      <li>• Vulnerability Assessment and Penetration Testing</li>
+      <li>• Secure Web Development</li>
+      <li>• Python & Bash Automation</li>
+    </ul>
+  </section>
 
+  <!-- ============================== -->
+  <!--          PROJECTS SECTION      -->
+  <!-- ============================== -->
+  <section id="projects" class="section">
+    <h2>Projects</h2>
+    <p>These are some of my GitHub projects:</p>
+    <div id="project-list"><p>Loading projects...</p></div>
+  </section>
+
+  <!-- ============================== -->
+  <!--      CERTIFICATIONS SECTION    -->
+  <!-- ============================== -->
+  <section id="certifications" class="section">
+    <h2>Certifications</h2>
+    <div class="certs">
+      <div class="cert">
+        <h3>Certified Ethical Hacker (CEH)</h3>
+        <p>EC-Council — 2024</p>
+      </div>
+      <div class="cert">
+        <h3>CompTIA Security+</h3>
+        <p>CompTIA — 2023</p>
+      </div>
+      <div class="cert">
+        <h3>Google Cybersecurity Professional</h3>
+        <p>Google — 2024</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== -->
+  <!--         CONTACT SECTION        -->
+  <!-- ============================== -->
+  <section id="contact" class="section">
+    <h2>Contact</h2>
+    <p>📧 Email: <a href="mailto:grishonmuthee54@gmail.com">grishonmuthee54@gmail.com</a></p>
+    <p>💼 LinkedIn: <a href="https://linkedin.com/in/grishonmuthee" target="_blank">linkedin.com/in/grishonmuthee</a></p>
+    <p>🐙 GitHub: <a href="https://github.com/grishonmuthee54" target="_blank">github.com/grishonmuthee54</a></p>
+  </section>
+
+  <!-- ============================== -->
+  <!--             FOOTER             -->
+  <!-- ============================== -->
   <footer>
     <p>© 2025 Grishon Muthee | Cybersecurity Portfolio</p>
   </footer>
 
+  <!-- ============================== -->
+  <!--             SCRIPTS            -->
+  <!-- ============================== -->
   <script>
     // === Terminal Typing Effect ===
     const lines = [
@@ -125,24 +186,27 @@
     }
     draw();
 
-    // === Dynamically Load Section Content ===
-    const sections = [
-      { id: "about", file: "about.html" },
-      { id: "projects", file: "projects.html" },
-      { id: "certifications", file: "certifications.html" },
-      { id: "contact", file: "contact.html" },
-    ];
-
-    sections.forEach(({ id, file }) => {
-      fetch(file)
-        .then(res => res.text())
-        .then(html => {
-          document.getElementById(id).innerHTML = html;
-        })
-        .catch(() => {
-          document.getElementById(id).innerHTML = `<p>⚠️ Could not load ${file}</p>`;
+    // === Fetch GitHub Projects ===
+    async function loadProjects() {
+      const container = document.getElementById("project-list");
+      try {
+        const res = await fetch("https://api.github.com/users/grishonmuthee54/repos?sort=updated");
+        const repos = await res.json();
+        container.innerHTML = "";
+        repos.forEach(repo => {
+          const div = document.createElement("div");
+          div.className = "project";
+          div.innerHTML = `
+            <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
+            <p>${repo.description || "No description available."}</p>
+          `;
+          container.appendChild(div);
         });
-    });
+      } catch {
+        container.innerHTML = "<p>⚠️ Unable to load projects.</p>";
+      }
+    }
+    loadProjects();
   </script>
 </body>
 </html>
