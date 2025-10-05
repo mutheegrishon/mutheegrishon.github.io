@@ -54,16 +54,47 @@
     </ul>
   </section>
 
-  <!-- ============================== -->
-  <!--          PROJECTS SECTION      -->
-  <!-- ============================== -->
-  <section id="projects" class="section">
-    <h2>Projects</h2>
-    <p>These are some of my GitHub projects:</p>
-    <div id="project-list"><p>Loading projects...</p></div>
-  </section>
+<!-- ============================== -->
+<!--          PROJECTS SECTION      -->
+<!-- ============================== -->
+<section id="projects" class="section">
+  <h2>Projects</h2>
+  <p>These are some of my GitHub projects:</p>
 
-  <!-- ============================== -->
+  <!-- Projects Grid -->
+  <div class="projects-grid" id="project-list">
+    <p>Loading projects...</p>
+  </div>
+
+  <script>
+    // === Fetch and display GitHub projects as cards ===
+    fetch("https://api.github.com/users/grishonmuthee54/repos")
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("project-list");
+        container.innerHTML = "";
+        data
+          .filter(repo => !repo.fork)
+          .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+          .forEach(repo => {
+            const div = document.createElement("div");
+            div.className = "project-card";
+            div.innerHTML = `
+              <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
+              <p>${repo.description || "No description available."}</p>
+            `;
+            container.appendChild(div);
+          });
+      })
+      .catch(err => {
+        document.getElementById("project-list").innerHTML =
+          "<p>⚠️ Unable to load projects right now.</p>";
+        console.error(err);
+      });
+  </script>
+</section>
+
+    <!-- ============================== -->
   <!--      CERTIFICATIONS SECTION    -->
   <!-- ============================== -->
   <section id="certifications" class="section">
