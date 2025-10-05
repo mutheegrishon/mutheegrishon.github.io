@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Grishon Muthee</title>
+  <link rel="stylesheet" href="circuit.css">
+</head>
+<body>
+  <canvas id="circuit"></canvas>
+  <header>
+    <div class="nav-left">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="certifications.html">Certifications</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-right">
+      <h1>Grishon Muthee</h1>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2>My GitHub Projects</h2>
+    <div id="projects" style="margin-top:30px;"></div>
+  </section>
+
+  <footer>
+    <p>© 2025 Grishon Muthee | Cybersecurity Portfolio</p>
+  </footer>
+
+  <script src="circuit.js"></script>
+  <script>
+    async function loadProjects() {
+      const username = "grishonmuthee54";
+      const container = document.getElementById("projects");
+      container.innerHTML = "<p>Loading projects...</p>";
+
+      try {
+        const res = await fetch(`https://api.github.com/users/${username}/repos?sort=updated`);
+        const repos = await res.json();
+
+        container.innerHTML = "";
+
+        repos.forEach(repo => {
+          const card = document.createElement("div");
+          card.style.border = "1px solid #00e6b8";
+          card.style.padding = "15px";
+          card.style.margin = "10px auto";
+          card.style.width = "80%";
+          card.style.borderRadius = "8px";
+          card.style.background = "rgba(0, 20, 20, 0.7)";
+          card.style.boxShadow = "0 0 10px #00e6b8";
+
+          card.innerHTML = `
+            <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
+            <p>${repo.description || "No description provided."}</p>
+            <p>★ ${repo.stargazers_count} | Forks: ${repo.forks_count}</p>
+          `;
+          container.appendChild(card);
+        });
+      } catch (e) {
+        container.innerHTML = "<p>⚠️ Unable to fetch projects. Please try again later.</p>";
+      }
+    }
+    loadProjects();
+  </script>
+</body>
+</html>
