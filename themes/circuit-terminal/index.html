@@ -129,7 +129,7 @@
 
   <script>
     // === Fetch and display GitHub projects as cards ===
-    fetch("https://api.github.com/users/grishonmuthee54/repos")
+    fetch("https://api.github.com/users/mutheegrishon/repos")
       .then(res => res.json())
       .then(data => {
         const container = document.getElementById("project-list");
@@ -149,7 +149,7 @@
       })
       .catch(err => {
         document.getElementById("project-list").innerHTML =
-          "<p>⚠️ Unable to load projects right now.</p>";
+          "<p> Unable to load projects right now.</p>";
         console.error(err);
       });
   </script>
