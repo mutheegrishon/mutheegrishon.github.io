@@ -197,3 +197,49 @@ footer {
   box-shadow: 0 0 10px rgba(0, 230, 184, 0.5);
 }
 
+/* === PROJECTS GRID (Cyber Card Theme) === */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 90%;
+  max-width: 1100px;
+  margin: 2rem auto;
+}
+
+.project-card {
+  background: rgba(0, 30, 30, 0.8);
+  border: 1px solid #00e6b8;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 230, 184, 0.3);
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0, 230, 184, 0.6);
+}
+
+.project-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  color: #00e6b8;
+}
+
+.project-card h3 a {
+  color: #00e6b8;
+  text-decoration: none;
+}
+
+.project-card h3 a:hover {
+  text-decoration: underline;
+  color: #66fff5;
+}
+
+.project-card p {
+  color: #aef5e8;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
