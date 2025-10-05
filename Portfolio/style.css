@@ -1,0 +1,75 @@
+/* Cybersecurity Theme Styling */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: 'Courier New', monospace;
+}
+
+body {
+  background: radial-gradient(circle at top, #0a0f1f, #000);
+  color: #00ff99;
+  line-height: 1.6;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 10, 20, 0.9);
+  border-bottom: 1px solid #00ff99;
+  z-index: 1000;
+  padding: 10px 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: auto;
+}
+
+.nav-left a {
+  color: #00ff99;
+  text-decoration: none;
+  margin-right: 20px;
+  transition: color 0.3s ease;
+}
+
+.nav-left a:hover {
+  color: #00cc66;
+}
+
+.nav-right h1 {
+  color: #00ff99;
+  font-size: 20px;
+}
+
+.section {
+  min-height: 100vh;
+  padding: 120px 10%;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #00ff99;
+}
+
+a {
+  color: #00ff99;
+  text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 10, 20, 0.8);
+  border-top: 1px solid #00ff99;
+  font-size: 14px;
+}
