@@ -190,7 +190,7 @@
     async function loadProjects() {
       const container = document.getElementById("project-list");
       try {
-        const res = await fetch("https://api.github.com/users/grishonmuthee54/repos?sort=updated");
+        const res = await fetch("https://api.github.com/users/mutheegrishon/repos?sort=updated");
         const repos = await res.json();
         container.innerHTML = "";
         repos.forEach(repo => {
@@ -203,7 +203,7 @@
           container.appendChild(div);
         });
       } catch {
-        container.innerHTML = "<p>⚠️ Unable to load projects.</p>";
+        container.innerHTML = "<p> Unable to load projects.</p>";
       }
     }
     loadProjects();
