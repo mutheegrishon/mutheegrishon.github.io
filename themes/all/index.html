@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grishon Muthee | Cybersecurity Portfolio</title>
+  <style>
+    /* === BASIC STRUCTURE === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', monospace;
+      scroll-behavior: smooth;
+    }
+    body {
+      overflow: hidden;
+      transition: background 1s ease, color 1s ease;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5%;
+      border-bottom: 1px solid;
+      z-index: 10;
+    }
+    .nav-left a {
+      margin-right: 20px;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    button.theme-toggle {
+      background: none;
+      border: 1px solid;
+      color: inherit;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .section {
+      text-align: center;
+      min-height: 100vh;
+      padding-top: 120px;
+      padding: 120px 10%;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    /* === THEME 1: MATRIX === */
+    body.matrix {
+      background: black;
+      color: #00ff00;
+    }
+    body.matrix header {
+      background: rgba(0, 0, 0, 0.8);
+      border-color: #00ff00;
+    }
+    body.matrix a {
+      color: #00ff00;
+    }
+    body.matrix button.theme-toggle:hover {
+      background: #00ff00;
+      color: black;
+    }
+
+    /* === THEME 2: TRON === */
+    body.tron {
+      background: radial-gradient(circle at bottom, #000010, #000);
+      color: #00ccff;
+    }
+    body.tron header {
+      background: rgba(0, 10, 30, 0.9);
+      border-color: #00ccff;
+    }
+    body.tron a {
+      color: #00ccff;
+    }
+    body.tron a:hover {
+      color: #ff00ff;
+    }
+    body.tron button.theme-toggle:hover {
+      background: #00ccff;
+      color: black;
+    }
+
+    /* === THEME 3: TERMINAL === */
+    body.terminal {
+      background: #000;
+      color: #00ff99;
+    }
+    body.terminal header {
+      background: #001100;
+      border-color: #00ff99;
+    }
+    body.terminal a {
+      color: #00ff99;
+    }
+    body.terminal button.theme-toggle:hover {
+      background: #00ff99;
+      color: black;
+    }
+  </style>
+</head>
+
+<body class="matrix">
+  <canvas id="bg"></canvas>
+
+  <header>
+    <div class="nav-left">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <h1>Grishon Muthee</h1>
+      <button class="theme-toggle">Switch Theme</button>
+    </div>
+  </header>
+
+  <section id="home" class="section">
+    <h2>Welcome to My Portfolio</h2>
+    <p>Cybersecurity Enthusiast | Ethical Hacker | Developer</p>
+  </section>
+
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>Detail about your cybersecurity background and skills.</p>
+  </section>
+
+  <section id="projects" class="section">
+    <h2>Projects</h2>
+    <p>Details about your cybersecurity projects and tools.</p>
+  </section>
+
+  <section id="certifications" class="section">
+    <h2>Certifications</h2>
+    <p>Links to your certifications (CEH, CompTIA, etc.).</p>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Contact</h2>
+    <p>Email: grishonmuthee54@gmail.com</p>
+  </section>
+
+  <script>
+    const themes = ["matrix", "tron", "terminal"];
+    let currentTheme = 0;
+    const body = document.body;
+    const canvas = document.getElementById("bg");
+    const ctx = canvas.getContext("2d");
+    const toggleButton = document.querySelector(".theme-toggle");
+
+    let animationFrame;
+    let matrixChars = [];
+    let columns, drops;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    // === MATRIX BACKGROUND ===
+    function matrixBackground() {
+      const fontSize = 16;
+      columns = canvas.width / fontSize;
+      drops = Array(Math.floor(columns)).fill(1);
+      const chars = "01";
+      ctx.font = fontSize + "px monospace";
+
+      function drawMatrix() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#0f0";
+        for (let i = 0; i < drops.length; i++) {
+          const text = chars[Math.floor(Math.random() * chars.length)];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+            drops[i] = 0;
+          drops[i]++;
+        }
+        animationFrame = requestAnimationFrame(drawMatrix);
+      }
+      drawMatrix();
+    }
+
+    // === TRON GRID BACKGROUND ===
+    function tronBackground() {
+      let offset = 0;
+      function drawGrid() {
+        ctx.fillStyle = "#000010";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        const spacing = 40;
+        ctx.strokeStyle = "#00ccff";
+        ctx.lineWidth = 0.5;
+        ctx.shadowColor = "#00ccff";
+        ctx.shadowBlur = 5;
+        ctx.beginPath();
+        for (let x = 0; x < canvas.width; x += spacing) {
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x - offset, canvas.height);
+        }
+        for (let y = 0; y < canvas.height; y += spacing) {
+          ctx.moveTo(0, y);
+          ctx.lineTo(canvas.width, y + offset);
+        }
+        ctx.stroke();
+        offset += 0.5;
+        animationFrame = requestAnimationFrame(drawGrid);
+      }
+      drawGrid();
+    }
+
+    // === TERMINAL PULSE BACKGROUND ===
+    function terminalBackground() {
+      function drawPulse() {
+        ctx.fillStyle = "#000";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = "#00ff99";
+        ctx.beginPath();
+        const midY = canvas.height / 2;
+        for (let x = 0; x < canvas.width; x++) {
+          const y = midY + Math.sin(x * 0.02 + Date.now() / 200) * 20;
+          ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        animationFrame = requestAnimationFrame(drawPulse);
+      }
+      drawPulse();
+    }
+
+    function startBackground(theme) {
+      cancelAnimationFrame(animationFrame);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (theme === "matrix") matrixBackground();
+      if (theme === "tron") tronBackground();
+      if (theme === "terminal") terminalBackground();
+    }
+
+    toggleButton.addEventListener("click", () => {
+      currentTheme = (currentTheme + 1) % themes.length;
+      body.className = themes[currentTheme];
+      startBackground(themes[currentTheme]);
+      toggleButton.textContent = `Theme: ${themes[currentTheme].toUpperCase()}`;
+    });
+
+    // Start initial theme
+    startBackground("matrix");
+    toggleButton.textContent = "Theme: MATRIX";
+  </script>
+</body>
+</html>
