@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grishon Muthee | Terminal Theme</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00ff00;
+      font-family: "Courier New", monospace;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #001100;
+      border-bottom: 1px solid #00ff00;
+      padding: 10px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+    a { color: #00ff00; margin-right: 20px; text-decoration: none; }
+    a:hover { color: #00cc00; }
+    .section {
+      padding-top: 100px;
+      padding-left: 10%;
+    }
+    #console {
+      padding: 20px;
+      background-color: rgba(0, 20, 0, 0.8);
+      border: 1px solid #00ff00;
+      width: 80%;
+      margin-top: 40px;
+      border-radius: 5px;
+    }
+    .blink {
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <h1>grishon@portfolio:~$</h1>
+  </header>
+
+  <section id="home" class="section">
+    <div id="console"></div>
+  </section>
+
+  <script>
+    const consoleDiv = document.getElementById("console");
+    const lines = [
+      "Initializing system...",
+      "Loading cybersecurity modules...",
+      "Starting network scan...",
+      "Access granted.",
+      "Welcome, Grishon Muthee.",
+      ">> Cybersecurity Enthusiast | Ethical Hacker | Developer"
+    ];
+    let lineIndex = 0;
+
+    function typeLine() {
+      if (lineIndex >= lines.length) return;
+      let line = lines[lineIndex];
+      let i = 0;
+      const interval = setInterval(() => {
+        consoleDiv.innerHTML += line[i];
+        i++;
+        if (i >= line.length) {
+          clearInterval(interval);
+          consoleDiv.innerHTML += "<br>";
+          lineIndex++;
+          setTimeout(typeLine, 700);
+        }
+      }, 50);
+    }
+    typeLine();
+  </script>
+</body>
+</html>
